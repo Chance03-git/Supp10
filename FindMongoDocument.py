@@ -1,6 +1,21 @@
 import unittest
 from pymongo import MongoClient
 def find_mongo_document_by_uuid(uuid_value, db_name="test_database", collection_name="test_collection"):
+    """
+    Finds a MongoDB document in the specified database and collection by UUID.
+
+    Args:
+        uuid_value (str): The UUID value to search for.
+        db_name (str, optional): The name of the database. Defaults to "test_database".
+        collection_name (str, optional): The name of the collection. Defaults to "test_collection".
+
+    Returns:
+        dict: The document matching the UUID, or None if no document is found.
+
+    Raises:
+        ValueError: If the UUID value is not a string.
+        Exception: If the MongoDB query fails for any reason.
+    """
     # Validate the input
     if not isinstance(uuid_value, str):
         raise ValueError("The UUID value must be a string.")
