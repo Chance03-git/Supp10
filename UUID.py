@@ -5,6 +5,31 @@ from pymongo import MongoClient
 
 # Simulated in-memory database
 mock_db = {}
+"""
+create_random_document()
+
+Creates a random MongoDB document with a unique UUID field.
+
+Returns:
+    str: The UUID of the newly inserted document.
+
+The document contains the following fields:
+- UUID: A version 4 UUID (string format).
+- field1: A placeholder field with a predefined value ("random_value_1").
+- field2: Another placeholder field with a predefined value ("random_value_2").
+
+The function connects to a MongoDB instance running locally on `localhost:27017`.
+It inserts the document into the `test_collection` collection within the `test_database`.
+
+Dependencies:
+- MongoDB server must be running and accessible at the default host and port.
+- The `pymongo` library must be installed.
+
+Example:
+    # Call the function to create and store a random document
+    document_uuid = create_random_document()
+    print(f"Document created with UUID: {document_uuid}")
+"""
 
 
 def create_random_document():
