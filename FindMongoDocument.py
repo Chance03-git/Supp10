@@ -1,6 +1,19 @@
 import unittest
 from pymongo import MongoClient
+def find_mongo_document_by_uuid(uuid_value, db_name="test_database", collection_name="test_collection"):
+    # Validate the input
+    if not isinstance(uuid_value, str):
+        raise ValueError("The UUID value must be a string.")
+    
+    # Connect to MongoDB
+    client = MongoClient("mongodb://localhost:27017/")  # Ensure MongoDB is running locally
+    db = client[db_name]  # Access the specified database
+    collection = db[collection_name]  # Access the specified collection
 
+    # Find the document by UUID
+    document = collection.find_one({"UUID": uuid_value})
+    
+    return document
 class TestFindMongoDocumentByUUID(unittest.TestCase):
     def setUp(self):
         self.client = MongoClient("mongodb://localhost:27017/")
