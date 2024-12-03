@@ -1,6 +1,19 @@
 import unittest
 from pymongo import MongoClient
+def delete_document_by_uuid(uuid_value, db_name="test_database", collection_name="test_collection"):
+    # Validate inputs
+    if not isinstance(uuid_value, str):
+        raise ValueError("The UUID value must be a string.")
 
+    # Connect to MongoDB
+    client = MongoClient("mongodb://localhost:27017/")  # Ensure MongoDB is running locally
+    db = client[db_name]  # Access the specified database
+    collection = db[collection_name]  # Access the specified collection
+
+    # Find and delete the document by UUID
+    deleted_document = collection.find_one_and_delete({"UUID": uuid_value})
+
+    return deleted_document
 class TestDeleteDocumentByUUID(unittest.TestCase):
     def setUp(self):
         self.client = MongoClient("mongodb://localhost:27017/")
