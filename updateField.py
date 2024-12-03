@@ -1,6 +1,25 @@
 import unittest
 from pymongo import MongoClient
+def update_field_by_uuid(uuid_value, field_name, new_value, db_name="test_database", collection_name="test_collection"):
+    # Validate inputs
+    if not isinstance(uuid_value, str):
+        raise ValueError("The UUID value must be a string.")
+    if not isinstance(field_name, str):
+        raise ValueError("The field name must be a string.")
+    
+    # Connect to MongoDB
+    client = MongoClient("mongodb://localhost:27017/")  # Ensure MongoDB is running locally
+    db = client[db_name]  # Access the specified database
+    collection = db[collection_name]  # Access the specified collection
 
+    # Update the document
+    result = collection.find_one_and_update(
+        {"UUID": uuid_value},                # Query to find the document by UUID
+        {"$set": {field_name: new_value}},   # Update operation to set the new value
+        return_document=True                 # Return the updated document
+    )
+
+    return result
 class TestUpdateFieldByUUID(unittest.TestCase):
     def setUp(self):
         self.client = MongoClient("mongodb://localhost:27017/")
