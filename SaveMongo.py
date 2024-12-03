@@ -1,6 +1,21 @@
 import unittest
 from pymongo import MongoClient
 
+def save_mongo_document(document, db_name="test_database", collection_name="test_collection"):
+    # Validate the input
+    if not isinstance(document, dict):
+        raise ValueError("The document must be a dictionary.")
+    
+    # Connect to MongoDB
+    client = MongoClient("mongodb://localhost:27017/")  # Ensure MongoDB is running locally
+    db = client[db_name]  # Access the specified database
+    collection = db[collection_name]  # Access the specified collection
+
+    # Insert the document
+    result = collection.insert_one(document)
+
+    # Return the inserted document's unique identifier (_id) as a string
+    return str(result.inserted_id)
 class TestSaveMongoDocument(unittest.TestCase):
     def setUp(self):
         self.client = MongoClient("mongodb://localhost:27017/")
