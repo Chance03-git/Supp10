@@ -1,6 +1,21 @@
 import unittest
 from pymongo import MongoClient
 def delete_document_by_uuid(uuid_value, db_name="test_database", collection_name="test_collection"):
+    """
+    Deletes a MongoDB document with the specified UUID.
+
+    Args:
+        uuid_value (str): The UUID of the document to delete.
+        db_name (str, optional): The name of the database. Defaults to "test_database".
+        collection_name (str, optional): The name of the collection. Defaults to "test_collection".
+
+    Returns:
+        dict: The deleted document if the deletion was successful, or None if no document was found.
+
+    Raises:
+        ValueError: If the `uuid_value` is not a string.
+        Exception: If the MongoDB delete operation fails.
+    """
     # Validate inputs
     if not isinstance(uuid_value, str):
         raise ValueError("The UUID value must be a string.")
