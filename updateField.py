@@ -1,6 +1,23 @@
 import unittest
 from pymongo import MongoClient
 def update_field_by_uuid(uuid_value, field_name, new_value, db_name="test_database", collection_name="test_collection"):
+    """
+    Updates a specific field in a MongoDB document identified by its UUID.
+
+    Args:
+        uuid_value (str): The UUID value of the document to update.
+        field_name (str): The name of the field to update.
+        new_value: The new value to set for the specified field.
+        db_name (str, optional): The name of the database. Defaults to "test_database".
+        collection_name (str, optional): The name of the collection. Defaults to "test_collection".
+
+    Returns:
+        dict: The updated document if the update was successful, or None if no document was found.
+
+    Raises:
+        ValueError: If the `uuid_value` or `field_name` is not a string.
+        Exception: If the MongoDB update operation fails for any reason.
+    """
     # Validate inputs
     if not isinstance(uuid_value, str):
         raise ValueError("The UUID value must be a string.")
