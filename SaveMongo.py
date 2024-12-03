@@ -2,6 +2,21 @@ import unittest
 from pymongo import MongoClient
 
 def save_mongo_document(document, db_name="test_database", collection_name="test_collection"):
+    """
+    Saves a MongoDB document to the specified database and collection.
+
+    Args:
+        document (dict): The document to save. Must be a valid dictionary.
+        db_name (str, optional): The name of the database. Defaults to "test_database".
+        collection_name (str, optional): The name of the collection. Defaults to "test_collection".
+
+    Returns:
+        str: The unique identifier (_id) of the inserted document as a string.
+
+    Raises:
+        ValueError: If the document is not a valid dictionary.
+        Exception: If the MongoDB insertion fails for any reason.
+    """
     # Validate the input
     if not isinstance(document, dict):
         raise ValueError("The document must be a dictionary.")
